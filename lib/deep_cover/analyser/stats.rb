@@ -2,6 +2,7 @@
 
 module DeepCover
   class Analyser::StatsBase
+    DECIMALS = 2
     include Memoize
     memoize :to_h, :total
 
@@ -32,10 +33,16 @@ module DeepCover
     def with(**values)
       self.class.new(to_h.merge(values))
     end
+
+    def percent_covered
+      potentially_executable = total - not_executable
+      return 100 if potentially_executable == 0
+      (100 * (1 - not_executed.fdiv(potentially_executable))).round(DECIMALS)
+    end
+
   end
 
   class Analyser::Stats < Analyser::StatsBase
-    DECIMALS = 2
     memoize :percent
 
     def percent

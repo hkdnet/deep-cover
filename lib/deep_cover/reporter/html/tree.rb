@@ -16,7 +16,8 @@ module DeepCover
       # 'some/example/path' => %w[some some/example some/example/path]
       def path_to_partial_paths(path)
         acc = nil
-        path.split('/')
+        path.to_s
+            .split('/')
             .map { |p| acc = [*acc, p].join('/') }
       end
 

@@ -15,54 +15,31 @@ module DeepCover
 
       let(:index) { HTML::Index.new(coverage.analysis.stats) }
       it {
-        index.stats_to_data.should ==
+        data = index.stats_to_data
+        children = data.first.delete(:children)
+        data.should ==
           [{text: 'cli_fixtures/trivial_gem/lib',
-            data:         {per_char_executed: 109,
-                           per_char_not_executed: 8,
-                           per_char_not_executable: 51,
-                           per_char_ignored: 0,
-                           branch_executed: 0,
-                           branch_not_executed: 0,
-                           branch_not_executable: 0,
-                           branch_ignored: 0,
-                           node_executed: 13,
-                           node_not_executed: 2,
-                           node_not_executable: 0,
-                           node_ignored: 2,
-                          },
-            children:         [{text: 'cli_fixtures/trivial_gem/lib/trivial_gem.rb',
-                                data:            {per_char_executed: 78,
-                                                  per_char_not_executed: 8,
-                                                  per_char_not_executable: 40,
-                                                  per_char_ignored: 0,
-                                                  branch_executed: 0,
-                                                  branch_not_executed: 0,
-                                                  branch_not_executable: 0,
-                                                  branch_ignored: 0,
-                                                  node_executed: 9,
-                                                  node_not_executed: 2,
-                                                  node_not_executable: 0,
-                                                  node_ignored: 2,
-                                                  },
-                                },
-                               {text: 'cli_fixtures/trivial_gem/lib/trivial_gem/version.rb',
-                                data:            {per_char_executed: 31,
-                                                  per_char_not_executed: 0,
-                                                  per_char_not_executable: 11,
-                                                  per_char_ignored: 0,
-                                                  branch_executed: 0,
-                                                  branch_not_executed: 0,
-                                                  branch_not_executable: 0,
-                                                  branch_ignored: 0,
-                                                  node_executed: 4,
-                                                  node_not_executed: 0,
-                                                  node_not_executable: 0,
-                                                  node_ignored: 0,
-                                                 },
-                               },
-                              ],
+            data: {per_char: {executed: 109, not_executed: 8, not_executable: 51, ignored: 0},
+                   branch: {executed: 0, not_executed: 0, not_executable: 0, ignored: 0},
+                   node: {executed: 13, not_executed: 2, not_executable: 0, ignored: 2},
+                   per_char_percent: 93.16,
+                   branch_percent: 100,
+                   node_percent: 88.24,
+            },
+            state: {opened: true},
             },
           ]
+        children.size.should == 2
+        children.first.should ==
+          {text: '<a href="cli_fixtures/trivial_gem/lib/trivial_gem.rb.html">cli_fixtures/trivial_gem/lib/trivial_gem.rb</a>',
+           data: {per_char: {executed: 78, not_executed: 8, not_executable: 40, ignored: 0},
+                  branch: {executed: 0, not_executed: 0, not_executable: 0, ignored: 0},
+                  node: {executed: 9, not_executed: 2, not_executable: 0, ignored: 2},
+                  per_char_percent: 90.7,
+                  branch_percent: 100,
+                  node_percent: 84.62,
+                },
+          }
       }
     end
 

@@ -35,7 +35,7 @@ module DeepCover
       analyser.each_node do |node, _children|
         node.executed_loc_hash.each do |kind, range|
           @rewriter.insert_before_multi(range, "<span #{node_attributes(node, kind)}>")
-          @rewriter.insert_after_multi(range, '</span>')
+          @rewriter.insert_before_multi(range.end, '</span>')
         end
       end
     end

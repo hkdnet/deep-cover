@@ -1,52 +1,84 @@
-// https://github.com/dracula/pygments/blob/2d85ede1540db3739d5404343aa722f54e042141/dracula.sass
-$gray-dark: #282a36
-// Current Line & Selection
-$gray: #44475a
-// Foreground
-$gray-light: #f8f8f2
-// Comment
-$blue: #6272a4
+// Adapted from GitHub's scheme https://raw.githubusercontent.com/primer/github-syntax-light/master/lib/github-light.css
+$pl-c: #6a737d /* comment punctuation.definition.comment string.comment */
 
-$cyan: #8be9fd
-$green: #50fa7b
-$orange: #ffb86c
-$pink: #ff79c6
-$purple: #bd93f9
-$red: #ff5555
-$yellow: #f1fa8c
+/* constant entity.name.constant variable.other.constant variable.language support meta.property-name support.constant support.variable meta.module-reference markup.raw meta.diff.header meta.output */
+$pl-v: #005cc5 /* string variable */
+
+$pl-en: #6f42c1 /* entity.name */
+
+/* variable.parameter.function storage.modifier.package storage.modifier.import storage.type.java variable.other */
+$pl-s1: #24292e /* string source */
+
+
+$pl-ent: #22863a /* entity.name.tag markup.quote */
+
+
+$pl-k: #d73a49 /* keyword storage storage.type */
+
+/* string */
+/* punctuation.definition.string source.regexp string.regexp.character-class */
+/* string punctuation.section.embedded source */
+/* string.regexp */
+/* string.regexp constant.character.escape */
+/* string.regexp source.ruby.embedded */
+$pl-s: #032f62 /* string.regexp string.regexp.arbitrary-repitition */
+
+/* variable */
+$pl-v: #e36209 /* sublimelinter.mark.warning */
+
+$pl-bu: #b31d28 /* invalid.broken invalid.deprecated invalid.unimplemented message.error brackethighlighter.unmatched sublimelinter.mark.error */
+
+$pl-ii: #fafbfc /* invalid.illegal */
+$pl-ii-background: #b31d28
+
+$pl-sr: #22863a /* string.regexp constant.character.escape */
+
+$pl-ml: #735c0f /* markup.list */
+
+/* markup.heading */
+/* markup.heading entity.name */
+$pl-mh: #005cc5 /* meta.separator */
+
+$pl-mi2: #f6f8fa /* markup.ignored markup.untracked */
+$pl-mi2-background: #005cc5
+
+
+// *** DeepCover Source ***
+
+$dark-green: #25712b
 
 code
   white-space: pre
   width: 100%
 
-// *** Color scheme ***
+// * Color scheme *
 .source
   padding: 5px
-  background: $gray-dark
+  background: white
 
 code
   // Default color, for unexecutable code
-  color: mix($gray-light, $gray-dark, 40%)
+  color: $pl-c
 
   // Executed code
   .run
-    color: $gray-light
+    color: $pl-s
 
   .not-run
-    background-color: lighten(hsl(hue(#f00), 100%, lightness($gray-dark)), 10%)
+    background-color: hsl(hue(#f00), 100%, 85%)
 
   .kind-keyword
-    color: $yellow
+    color: $pl-k
 
   // Literals:
-  .kind-expression
-    color: $purple
+  .kind-expression, .node-const
+    color: $pl-v
 
   .node-send
-    color: $blue
+    color: $dark-green
 
   .node-str
-    color: $orange
+    color: $pl-s
 
 .tree
   // Overrides
